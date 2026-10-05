@@ -1,0 +1,6 @@
+{
+  "name": "KopiFinder - Specialty Coffee & Cupping Passport",
+  "description": "Discover Indonesia's finest specialty coffee roasters, log cupping notes, collect digital passport stamps, and unlock artisanal barista perks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
