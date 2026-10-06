@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { ScreenName } from '../types';
+import { Cafe, ScreenName } from '../types';
 
 interface LogVisitScreenProps {
+  cafe?: Cafe;
   onNavigate: (screen: ScreenName) => void;
   onSubmitLog: (stampName: string) => void;
 }
 
-export const LogVisitScreen: React.FC<LogVisitScreenProps> = ({ onNavigate, onSubmitLog }) => {
-  const [selectedBean, setSelectedBean] = useState('Aceh Gayo Natural');
+export const LogVisitScreen: React.FC<LogVisitScreenProps> = ({ cafe, onNavigate, onSubmitLog }) => {
+  const currentCafeName = cafe?.name || 'Tanamera Specialty Roastery';
+  const defaultBean = cafe?.menu?.[0]?.name || 'Aceh Gayo Natural Single Origin';
+
+  const [selectedBean, setSelectedBean] = useState(defaultBean);
   const [selectedMethod, setSelectedMethod] = useState('v60');
   const [tempMode, setTempMode] = useState<'hot' | 'iced'>('hot');
   const [selectedNotes, setSelectedNotes] = useState<string[]>([
@@ -23,7 +27,7 @@ export const LogVisitScreen: React.FC<LogVisitScreenProps> = ({ onNavigate, onSu
     value: 4
   });
   const [notesText, setNotesText] = useState(
-    'Incredible jasmine aroma on first bloom, delicate peach finish as it cooled down. Barista Dimas dialed the grinder spot on.'
+    'Incredible jasmine aroma on first bloom, delicate peach finish as it cooled down. Barista dialed the grinder spot on.'
   );
   const [publishToFeed, setPublishToFeed] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,7 +61,7 @@ export const LogVisitScreen: React.FC<LogVisitScreenProps> = ({ onNavigate, onSu
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
-      onSubmitLog('Tanamera Specialty Roastery');
+      onSubmitLog(currentCafeName);
       setTimeout(() => {
         onNavigate('passport');
       }, 1200);
@@ -73,13 +77,16 @@ export const LogVisitScreen: React.FC<LogVisitScreenProps> = ({ onNavigate, onSu
             <div className="w-12 h-12 rounded-xl bg-[#f1ede7] shrink-0 overflow-hidden shadow-xs">
               <img
                 className="w-full h-full object-cover"
-                alt="Tanamera Coffee"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8SF03sWTDQIVnT91x2wdbwfXOWhE_FvXsueCu2Pa2KiSndh1EgRSF73vXBuN0iPxQFXIZUs5aawnkX3Lg2s4wA9FYhE65oOButNjva_nXhfuxCYwEU-i2xxCGnN6uCOQltp8n3kwXS8qc_xOrC-lIXlt9NJwfe2kZQ6dj3p0C-shLYr1NKPvDzIrN_MqK4A49V299o1Wv_P8J0er7U1VaWaEdGiq4PPcDqGg-HW1zLimoy9nBRL_pYw"
+                alt={currentCafeName}
+                src={
+                  cafe?.images?.[0] ||
+                  'https://lh3.googleusercontent.com/aida-public/AB6AXuB8SF03sWTDQIVnT91x2wdbwfXOWhE_FvXsueCu2Pa2KiSndh1EgRSF73vXBuN0iPxQFXIZUs5aawnkX3Lg2s4wA9FYhE65oOButNjva_nXhfuxCYwEU-i2xxCGnN6uCOQltp8n3kwXS8qc_xOrC-lIXlt9NJwfe2kZQ6dj3p0C-shLYr1NKPvDzIrN_MqK4A49V299o1Wv_P8J0er7U1VaWaEdGiq4PPcDqGg-HW1zLimoy9nBRL_pYw'
+                }
               />
             </div>
             <div className="min-w-0">
-              <h2 className="text-sm font-bold text-[#271310] truncate">Tanamera Specialty Roastery</h2>
-              <p className="text-xs text-[#504442] truncate">Senopati, South Jakarta</p>
+              <h2 className="text-sm font-bold text-[#271310] truncate">{currentCafeName}</h2>
+              <p className="text-xs text-[#504442] truncate">{cafe?.address || 'Senopati, South Jakarta'}</p>
             </div>
           </div>
           <span className="inline-flex items-center gap-1 bg-[#c8f17a] text-[#131f00] px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0">

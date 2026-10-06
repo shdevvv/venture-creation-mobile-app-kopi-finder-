@@ -1,0 +1,72 @@
+[
+  {
+    "id": "senopati",
+    "name": "Senopati & Gunawarman",
+    "cafeCount": 28,
+    "partnerCount": 4,
+    "distance": "1.2 km",
+    "badge": "COFFEE DISTRICT OF THE MONTH",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBDFACTEaiIXGenV2dLKhK1rIvVqNdInqguOC2LM5l-oZGNRG1dE0lJl2K_BDL81dZijwMRyCLCX-ltpARPm9YeAzfefsv2Sv2PPgRHFqRoP9atxNT8yVqS_M6YYQgRuhza5dV9PSRdrz6JbnEFX9q35IA37xQi_1ZGvKc1rl86--9HoGZFQ61LvK7rL79SZgP_lolFen_xSnl0MqYegBUyVz9kLNNHCzoWwogRde1seb7jn1g7VlmW7Q",
+    "bannerText": "COFFEE DISTRICT OF THE MONTH",
+    "tags": ["#ThirdWave", "#Vibrant", "#PourOverHub"],
+    "region": "South Jakarta"
+  },
+  {
+    "id": "cipete",
+    "name": "Cipete & Fatmawati",
+    "cafeCount": 31,
+    "partnerCount": 6,
+    "distance": "4.5 km",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBRuSMIGdeKAyambW4wfxshWciYxD4BWn7jDew2LFtI5g86Cux69nD6ApftGWFzfN2N7gPtcXsr3rRNX2Kemzp9Yundw_QS9L9t4tKtyyOy-U5bJuaNJ7f4EDvvIKOemf_ysYsLPWJJg0Apee3dnVweHmLy0H0XXPxByESeMeH1WCfr1NpFF9Efxo62AGla_Ce2Esx5wgCQXLExlQp0JSLMClh_MJbZkfmbK-vKWyLK4iIPefmJb3SBkA",
+    "bannerText": "Famous 2km Coffee Corridor",
+    "tags": ["#CoffeeStrip", "#SingleOrigin", "#Affordable"],
+    "region": "South Jakarta"
+  },
+  {
+    "id": "menteng",
+    "name": "Menteng & Cikini",
+    "cafeCount": 16,
+    "partnerCount": 3,
+    "distance": "5.2 km",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCIqtmvN2dnkXiLU-qnoFkS7fBewnEZndAQYalNL0Kv65eSlN-TjiDU_8ZtX8kqJHZ1a6ABrw8Od3rOmVf_NGcO1nimt-MeBHLQbL_5ZSAiMxpZdYp-6O3BsPhA-iB22c9HHcV-49PA0MwLTT6t1l6FF9eqcKZ2EQVSHQC5ily5L1KPhTHbEtroCTonZAweggPV-43jP5e_t3YRsAPDBVm7hrGOsd68ueZIH8V_zS5z86JM3i_oh1UH5g",
+    "bannerText": "Architectural Preservation & Roastery",
+    "tags": ["#Heritage", "#ClassicKopi", "#VintageVibe"],
+    "region": "Central Jakarta"
+  },
+  {
+    "id": "jakbar",
+    "name": "Puri Indah & Tanjung Duren",
+    "cafeCount": 22,
+    "partnerCount": 4,
+    "distance": "3.8 km",
+    "badge": "WEST JAKARTA SPECIALTY BELT",
+    "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800",
+    "bannerText": "Minimalist Workspaces & Roasters",
+    "tags": ["#WFCFriendly", "#FilterRoast", "#ModernZen"],
+    "region": "West Jakarta"
+  },
+  {
+    "id": "jakut",
+    "name": "Kelapa Gading & PIK",
+    "cafeCount": 26,
+    "partnerCount": 5,
+    "distance": "4.2 km",
+    "badge": "COASTAL & GASTRONOMY ROASTERS",
+    "image": "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=800",
+    "bannerText": "Industrial Roasteries & Brunch Spots",
+    "tags": ["#MicroRoaster", "#SpecialtyBar", "#PetFriendly"],
+    "region": "North / PIK"
+  },
+  {
+    "id": "jaktim",
+    "name": "Rawamangun & Jatiwaringin",
+    "cafeCount": 18,
+    "partnerCount": 3,
+    "distance": "4.8 km",
+    "badge": "COMMUNITY & ZEN SLOW BAR",
+    "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800",
+    "bannerText": "Lush Green Spaces & Artisanal Slow Bar",
+    "tags": ["#ZenGarden", "#ManualBrew", "#CalmFocus"],
+    "region": "East Jakarta"
+  }
+]

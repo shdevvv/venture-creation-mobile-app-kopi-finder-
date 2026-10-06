@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ScreenName } from '../types';
+import { MOCK_VOUCHERS } from '../data/mockData';
 
 interface PerkVoucherScreenProps {
   onNavigate: (screen: ScreenName) => void;
 }
 
 export const PerkVoucherScreen: React.FC<PerkVoucherScreenProps> = ({ onNavigate }) => {
-  const [totalSeconds, setTotalSeconds] = useState(4 * 3600 + 32 * 60 + 15);
+  const voucher = MOCK_VOUCHERS[0];
+  const [totalSeconds, setTotalSeconds] = useState(voucher.expiresHours * 3600);
   const [isSaved, setIsSaved] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pinDigits, setPinDigits] = useState(['', '', '', '']);
@@ -29,7 +31,7 @@ export const PerkVoucherScreen: React.FC<PerkVoucherScreenProps> = ({ onNavigate
 
   const handleCopyCode = () => {
     if (navigator.clipboard) {
-      navigator.clipboard.writeText('TF-B1G1-8921-JKT');
+      navigator.clipboard.writeText(voucher.code);
     }
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2000);
@@ -60,24 +62,24 @@ export const PerkVoucherScreen: React.FC<PerkVoucherScreenProps> = ({ onNavigate
             stars
           </span>
           <span className="text-[10px] font-bold uppercase tracking-wider">
-            Two Roasters × KopiFinder Exclusive
+            {voucher.bannerText}
           </span>
         </div>
 
         <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#504442] bg-[#f1ede7] px-2.5 py-1 rounded-full">
           <span className="w-1.5 h-1.5 rounded-full bg-[#7ca034] animate-pulse"></span>
-          Flash Perk
+          {voucher.discountBadge}
         </span>
       </div>
 
       {/* Header Title */}
       <div className="mb-4">
         <h2 className="font-headline-lg text-xl sm:text-2xl font-bold text-[#271310] tracking-tight">
-          Buy 1 Get 1 Manual Brew
+          {voucher.title}
         </h2>
         <p className="text-xs text-[#504442] mt-0.5 flex items-center gap-1">
           <span className="material-symbols-outlined text-[15px] text-[#7d562d]">storefront</span>
-          Valid today only at Two Roasters • Senopati branch
+          Valid today only at {voucher.partnerCafe} • {voucher.branch}
         </p>
       </div>
 
@@ -91,8 +93,8 @@ export const PerkVoucherScreen: React.FC<PerkVoucherScreenProps> = ({ onNavigate
                 <span className="material-symbols-outlined text-[24px]">local_cafe</span>
               </div>
               <div>
-                <div className="text-sm font-bold text-[#271310]">B1G1 V60 / Kalita Wave</div>
-                <div className="text-[11px] text-[#504442]">Single Origin Ethiopian & Gayo selection</div>
+                <div className="text-sm font-bold text-[#271310]">{voucher.title}</div>
+                <div className="text-[11px] text-[#504442]">{voucher.subtitle}</div>
               </div>
             </div>
           </div>
@@ -173,7 +175,7 @@ export const PerkVoucherScreen: React.FC<PerkVoucherScreenProps> = ({ onNavigate
             {/* Voucher Code */}
             <div className="mt-2 flex items-center gap-1.5">
               <span className="text-xs sm:text-sm tracking-widest text-[#271310] font-mono font-bold select-all">
-                #TF-B1G1-8921-JKT
+                #{voucher.code}
               </span>
               <button
                 type="button"
@@ -194,15 +196,11 @@ export const PerkVoucherScreen: React.FC<PerkVoucherScreenProps> = ({ onNavigate
 
           {/* Quick Terms Pills */}
           <div className="mt-3 w-full flex flex-wrap justify-center gap-1">
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-[#f1ede7] text-[#504442] text-[10px] font-semibold">
-              <span className="material-symbols-outlined text-[13px] text-[#7d562d]">table_restaurant</span> Dine-in only
-            </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-[#f1ede7] text-[#504442] text-[10px] font-semibold">
-              <span className="material-symbols-outlined text-[13px] text-[#7d562d]">coffee_maker</span> V60 or Kalita
-            </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-[#f1ede7] text-[#504442] text-[10px] font-semibold">
-              <span className="material-symbols-outlined text-[13px] text-[#7d562d]">badge</span> Passport Holders
-            </span>
+            {voucher.terms.map((term: string, idx: number) => (
+              <span key={idx} className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-[#f1ede7] text-[#504442] text-[10px] font-semibold">
+                <span className="material-symbols-outlined text-[13px] text-[#7d562d]">check_circle</span> {term}
+              </span>
+            ))}
           </div>
         </div>
       </div>

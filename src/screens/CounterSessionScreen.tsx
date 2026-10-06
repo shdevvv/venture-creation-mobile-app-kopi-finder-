@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScreenName } from '../types';
+import { MOCK_VOUCHERS } from '../data/mockData';
 
 interface CounterSessionScreenProps {
   onNavigate: (screen: ScreenName) => void;
@@ -10,6 +11,7 @@ export const CounterSessionScreen: React.FC<CounterSessionScreenProps> = ({
   onNavigate,
   onStampCollected
 }) => {
+  const currentCode = MOCK_VOUCHERS[0]?.code || 'TF-B1G1-8921-JKT';
   const [totalSeconds, setTotalSeconds] = useState(585); // 9m 45s
   const [currentTime, setCurrentTime] = useState('14:32:05');
   const [copiedCode, setCopiedCode] = useState(false);
@@ -32,7 +34,7 @@ export const CounterSessionScreen: React.FC<CounterSessionScreenProps> = ({
 
   const handleCopyCode = () => {
     if (navigator.clipboard) {
-      navigator.clipboard.writeText('TF-B1G1-8921-JKT');
+      navigator.clipboard.writeText(currentCode);
     }
     setCopiedCode(true);
     setTimeout(() => setCopiedCode(false), 2000);

@@ -1,0 +1,97 @@
+[
+  {
+    "id": "post-1",
+    "authorName": "Budi Santoso",
+    "authorHandle": "@budibrews",
+    "authorBadge": "Q-Grader Apprentice",
+    "authorAvatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuDnFpjnN_yYEShDEjcvk5EQtdgVzykuO-EzGI38eVj68LiVC_P6lIYjDPwvxPQCkepyV9Vi1b9-2bcWXnVmTcPaVpencA95pmmNq6xsNuYU6SbtRgknBzkG2Px0FXT5qdO04O5ReQts0ltqRcSENXhb1AmEA5r6nOZCvF8IFEWOnF5wDXnVEO2rokm1IalRl--wW6rezZayHyMo5qfijYjzC1D9r30s43jxTo9s_0A8sZs6ShMusngoqg",
+    "timeAgo": "25m ago",
+    "isVerified": true,
+    "cafeName": "Tanamera Roastery",
+    "cafeLocation": "Senopati, South Jakarta",
+    "content": "Dialed in this Aceh Gayo Anaerobic V60! 72h fermentation brings out explosive notes of red apple and jasmine honey. 22g in, 330g out, 2m45s brew time on Hario Switch. ☕️✨",
+    "brewRecipe": {
+      "method": "Switch V60",
+      "dose": "22g : 330ml",
+      "temp": "92°C",
+      "time": "2m 45s"
+    },
+    "scaScore": 87.5,
+    "sensoryScores": {
+      "acidity": 4,
+      "sweetness": 5,
+      "body": 3,
+      "aroma": 5
+    },
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDLNatpW4IubB51Xf7paa-GpsAF3iOm5xYNy7BjO6RXmxBeNpX7P3kuiKGgqq9ahuwxI2XbiImf0hJqu_mPX0-_MkT9kRrHbCGyYfJ7tz05Kqpc72vHoDvIVzDMZO_TSQJdrMBucEzWnOxQIidIPDHvswuN95ifqasWOVTlt8OmxKjbmHPuE3Qfv9N1-KODWtcE07SIxXAkrwTjq1FbaBZMV64ZH3DMX_GAiQJRxEPxgjKj_pyr2UgeBw",
+    "imageBadge": "Aceh Gayo Anaerobic",
+    "tags": ["#SingleOrigin", "#V60Brews", "#JakartaCoffee", "#TanameraRoastery"],
+    "likes": 42,
+    "comments": 8,
+    "userLiked": false,
+    "savedToPassport": false
+  },
+  {
+    "id": "post-2",
+    "authorName": "Rina Wijaya",
+    "authorHandle": "@rinacodes",
+    "authorBadge": "Remote Roaster",
+    "authorAvatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuCC7UJjonSo2hauXXMpOiyZh0oZ--NMv9y9hDnWyxSz-tYs7BJhL3vaP0tQffABhQHXEPlbXC3z0d-5jgUU7Pl338LzKJdobKCUv_nhwiaaNp_KDD979TAW_Khf9YjNQIX_KohbkMtvH5acL4BebenM3_y7_dSxNRgJbuNAEjYDD-qD2qteqUHSHe9RM7LXCyVwHO0Y60hopbT7Qst43CUSU7QkUhuQ1insnBAlnrIyD_hhujC3kk8Akw",
+    "timeAgo": "1h ago",
+    "isVerified": true,
+    "cafeName": "Kroma Studio",
+    "cafeLocation": "Senopati Mezzanine",
+    "content": "If you need to crank out deep work in Senopati, Kroma's upstairs mezzanine is unmatched today. Speedtest: 118 Mbps down, silent lo-fi beats, plenty of sockets. Oat flat white is top notch too. 🎧💻",
+    "workStats": {
+      "downloadMbps": 118,
+      "noiseDb": 51,
+      "noiseLabel": "Whisper",
+      "socketRatio": "100%"
+    },
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDZMy-uN_84UHpwIXJi6-FozARcETZak4Hq4gF3Y8AXZ-6gPVIXp_25sV3RYA-scAXhxQD8jzAPZpmdzh9SNkaPAADRlkRtBZvsizCA9uRsjuqTeZ8UKyR4FprN_TfA1ijptL3KZ5y3NxvJSdYlt2TSXENCF7tIbMNV7tmMdIp46XYVPL8SW88ESntvXJe4hAUXfB2ku2mROXvVMJkBjsW3bfltyFgtCzg9J6wk_Q8AlJYQwwcSIeF-4Q",
+    "imageBadge": "Quiet Work Zone (Level 2)",
+    "tags": ["#RemoteWork", "#SpeedtestVerified", "#OatFlatWhite"],
+    "likes": 29,
+    "comments": 5,
+    "userLiked": false,
+    "savedToPassport": false
+  },
+  {
+    "id": "post-3",
+    "authorName": "Dimas Pratama",
+    "authorHandle": "@dimasbrews",
+    "authorBadge": "Cupping Specialist",
+    "authorAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+    "timeAgo": "2h ago",
+    "isVerified": true,
+    "cafeName": "Kyo Coffee",
+    "cafeLocation": "Rawamangun & Jatiwaringin",
+    "content": "Tried the Tokyo Slow-Drip V60 at Kyo Coffee Jakarta Timur. The stone fruit sweetness combined with jasmine florals makes this one of the cleanest manual brews in town! 🍃🇯🇵",
+    "brewRecipe": {
+      "method": "Hario V60 Slow-Drip",
+      "dose": "18g : 270ml",
+      "temp": "91°C",
+      "time": "3m 10s"
+    },
+    "scaScore": 88.5,
+    "sensoryScores": {
+      "acidity": 4,
+      "sweetness": 5,
+      "body": 3,
+      "aroma": 5
+    },
+    "workStats": {
+      "downloadMbps": 95,
+      "noiseDb": 46,
+      "noiseLabel": "Quiet Zen",
+      "socketRatio": "90%"
+    },
+    "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800",
+    "imageBadge": "Zen Garden Slow Brew",
+    "tags": ["#TokyoSlowDrip", "#EastJakartaCoffee", "#ZenVibe"],
+    "likes": 35,
+    "comments": 4,
+    "userLiked": false,
+    "savedToPassport": false
+  }
+]

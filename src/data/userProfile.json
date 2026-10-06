@@ -1,0 +1,59 @@
+{
+  "user": {
+    "name": "Maya Putri",
+    "handle": "@mayabrews",
+    "level": 5,
+    "levelTitle": "Jakarta Coffee Explorer",
+    "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuBjR_jacB8avppC-reNMEI-NrcnSYzg0jlPhii2IUYwBnKbPqbkrTb-ZEGjZkUl2zcNVSovz2IsM49HJbDo8UnWMQgiWWKPrpDpWRSWjif0YNdRdmym6tJTIlQ4cr9pggcmZXL_ybjzqrkSEyw5wbFDPbG-uRfYvkXNQOuSSYYlin_ZbCNUTI9_eSZqfTOJiNaU_aqgHxsI82WmE-2NgNGI785ErZo41snrIP5Urh7VvHuqZiIZrS0znQ",
+    "cafesVisited": 24,
+    "roasterStamps": 8,
+    "perkPoints": 1450,
+    "reviewsLogged": 14,
+    "nextRankTarget": 30,
+    "nextRankName": "Master Roaster",
+    "activeFlair": "Acidity Adventurer",
+    "roastPreference": "Medium-Light (Filter)",
+    "preferredBrewMethods": ["V60 Dripper", "Aeropress", "Japanese Cold Drip"],
+    "signatureFlavorNotes": ["🌸 Jasmine", "🍋 Bergamot", "🍑 Stone Fruit", "🍯 Honeycomb"],
+    "passActive": true,
+    "passExpiry": "Dec 2026",
+    "offlineMapDownloaded": true,
+    "notificationsEnabled": true,
+    "dietaryPreference": "Oat Milk preferred • No Dairy",
+    "visualAtmosphere": "Light Warm Mode (Cozy Coffee Hue)"
+  },
+  "initialPassportStamps": [
+    {
+      "id": "stamp-1",
+      "cafeId": "tanamera",
+      "cafeName": "Tanamera",
+      "date": "May 12",
+      "themeColor": "#ba1a1a",
+      "icon": "coffee"
+    },
+    {
+      "id": "stamp-2",
+      "cafeId": "giyanti",
+      "cafeName": "Giyanti",
+      "date": "May 19",
+      "themeColor": "#7d562d",
+      "icon": "stars"
+    },
+    {
+      "id": "stamp-3",
+      "cafeId": "anomali",
+      "cafeName": "Anomali",
+      "date": "May 24",
+      "themeColor": "#271310",
+      "icon": "local_cafe"
+    },
+    {
+      "id": "stamp-4",
+      "cafeId": "kroma",
+      "cafeName": "Kroma Studio",
+      "date": "Jun 02",
+      "themeColor": "#7ca034",
+      "icon": "eco"
+    }
+  ]
+}

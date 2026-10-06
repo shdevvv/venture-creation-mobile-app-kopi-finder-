@@ -411,7 +411,7 @@ export const CafeDetailScreen: React.FC<CafeDetailScreenProps> = ({
       </div>
 
       {/* 5. Floating Action Footer CTA Bar */}
-      <div className="fixed bottom-0 inset-x-0 z-40 bg-[#fdf9f3]/95 backdrop-blur-xl shadow-[0_-8px_24px_rgba(62,39,35,0.12)] px-4 py-3 pb-safe border-t border-[#f1ede7]">
+      <div className="sticky bottom-0 inset-x-0 z-30 bg-[#fdf9f3]/95 backdrop-blur-xl shadow-[0_-8px_24px_rgba(62,39,35,0.12)] px-4 py-3 pb-safe border-t border-[#f1ede7] mt-4">
         <div className="flex items-center gap-3 max-w-md mx-auto">
           {/* Directions */}
           <button

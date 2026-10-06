@@ -1,0 +1,51 @@
+{
+  "id": "bean-story-daily",
+  "lotCode": "Lot #24-FBR",
+  "edition": "Daily Staff Pick • Jakarta Edition",
+  "beanName": "Flores Bajawa Anaerobic Natural",
+  "roasteryName": "Anomali Coffee Roastery",
+  "roasteryLocation": "Jakarta",
+  "roasteryId": "anomali",
+  "curator": {
+    "name": "Mikael J.",
+    "title": "Head Q-Grader & Sensory Judge",
+    "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuB4mNT-FsAPtvHI-LvV03f-PNWEPP4-yx5YAMBl4hSWAX04gJwIEo1wc6SKvEUo5dsN69YCpu2N-0mekmPYEc0grJei3Vg6ARIhVt6A91CpOkakpBH0ZZqQQzfyHE10GLsBNL6hepusMq21yMlZFfVWkMef22_68HZKeHRmWbc0dDvt7kZfZGeRTbqEr-BYZbS12S-y70Q0OCofubRjAEFkpwAdXXOvGs5Iua4d3ED2Z9fE1H0R3q4zYA"
+  },
+  "heroImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCnkqcO3vh8YbiZNcDHGY02P3436fpLxOl3svY-1uRZKeeBG8bYF7UM4naHwXvLw5aOIKLaOA_qNdha3AGE8sjIzfh1swxDElCI58QAlxANa74w0B-8deXR18nJvQsb7-4MM10b7PlIJSjjzE1ukVne73CXkO1rQva1nMrOzNR4sT7aae6hkX8okPhzgrpcy921yOlEpugC1ctI5yj9Jrwj5YYakwbVRShsMEDLCwUarxp4eAjebjDqgA",
+  "tagline": "Single Origin Micro-Lot",
+  "origin": "Bajawa Highlands, Flores • 1,520m",
+  "roastLevel": "Light-Medium Filter Roast",
+  "tastingNotes": [
+    "Ripe Dark Plum",
+    "Raw Cacao Nibs",
+    "Wild Forest Honey",
+    "Tamarind Glaze"
+  ],
+  "sensoryBars": {
+    "acidity": {
+      "score": 3.5,
+      "max": 5,
+      "desc": "Crisp stone fruit",
+      "percent": 70
+    },
+    "sweetness": {
+      "score": 4.5,
+      "max": 5,
+      "desc": "Honey molasses",
+      "percent": 90
+    },
+    "body": {
+      "score": 3.0,
+      "max": 5,
+      "desc": "Silky tea-like",
+      "percent": 60
+    }
+  },
+  "storyText": "Harvested by multi-generational family growers in the volcanic slopes of Mount Inerie, Flores. These cherries undergo 72 hours of oxygen-free anaerobic fermentation in stainless tanks, followed by 21 days of slow patio drying.",
+  "farmDetails": {
+    "elevation": "1,520 MASL",
+    "variety": "Kartika & S-795",
+    "process": "Anaerobic Natural",
+    "harvest": "Mid 2026"
+  }
+}

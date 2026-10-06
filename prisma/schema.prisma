@@ -1,0 +1,112 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id              String          @id @default(cuid())
+  name            String
+  email           String?         @unique
+  handle          String          @unique
+  avatar          String
+  level           Int             @default(1)
+  levelTitle      String          @default("Coffee Novice")
+  cafesVisited    Int             @default(0)
+  roasterStamps   Int             @default(0)
+  perkPoints      Int             @default(0)
+  reviewsLogged   Int             @default(0)
+  createdAt       DateTime        @default(now())
+
+  stamps          Stamp[]
+  reviews         CuppingReview[]
+  savedCafes      SavedCafe[]
+}
+
+model Cafe {
+  id              String          @id
+  name            String
+  verified        Boolean         @default(false)
+  address         String
+  neighborhood    String
+  distance        String
+  priceRange      String
+  hours           String
+  isOpen          Boolean         @default(true)
+  rating          Float           @default(4.8)
+  reviewCount     Int             @default(0)
+  images          String          // JSON array of image URLs
+  features        String          // JSON array of features
+  lat             Float
+  lng             Float
+  
+  // Aspect & Specs
+  wifiSpeed       String
+  wifiLabel       String
+  noiseDb         String
+  noiseLabel      String
+  aspectCoffee    Float
+  aspectVibe      Float
+  aspectPlugs     String
+  aspectService   Float
+
+  menu            MenuItem[]
+  stamps          Stamp[]
+  reviews         CuppingReview[]
+  savedBy         SavedCafe[]
+}
+
+model MenuItem {
+  id              String          @id @default(cuid())
+  cafeId          String
+  cafe            Cafe            @relation(fields: [cafeId], references: [id], onDelete: Cascade)
+  name            String
+  category        String          // coffee, manual-brew, non-coffee, light-bites
+  badge           String?
+  badgeType       String?
+  description     String
+  price           String
+  tastingNotes    String          // JSON array
+
+  createdAt       DateTime        @default(now())
+}
+
+model Stamp {
+  id              String          @id @default(cuid())
+  userId          String
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cafeId          String
+  cafe            Cafe            @relation(fields: [cafeId], references: [id], onDelete: Cascade)
+  cafeName        String
+  validatedAt     DateTime        @default(now())
+}
+
+model CuppingReview {
+  id              String          @id @default(cuid())
+  userId          String
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cafeId          String
+  cafe            Cafe            @relation(fields: [cafeId], references: [id], onDelete: Cascade)
+  beanName        String
+  brewMethod      String
+  tastingNotes    String          // JSON array
+  content         String
+  coffeeRating    Int             @default(5)
+  ambienceRating  Int             @default(5)
+  wifiRating      Int             @default(5)
+  createdAt       DateTime        @default(now())
+}
+
+model SavedCafe {
+  id              String          @id @default(cuid())
+  userId          String
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cafeId          String
+  cafe            Cafe            @relation(fields: [cafeId], references: [id], onDelete: Cascade)
+  createdAt       DateTime        @default(now())
+
+  @@unique([userId, cafeId])
+}

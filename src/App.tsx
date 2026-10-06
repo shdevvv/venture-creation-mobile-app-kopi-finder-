@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ScreenName, TabName, DeviceMode, UserProfile } from './types';
+import React, { useState, useEffect } from 'react';
+import { Cafe, ScreenName, TabName, DeviceMode, UserProfile } from './types';
 import {
   INITIAL_USER,
   MOCK_CAFES,
@@ -28,6 +28,7 @@ import { PerkVoucherScreen } from './screens/PerkVoucherScreen';
 import { BeanStoryScreen } from './screens/BeanStoryScreen';
 import { CounterSessionScreen } from './screens/CounterSessionScreen';
 import { ReactNativeCodeModal } from './screens/ReactNativeCodeModal';
+import { api } from './services/api';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenName>('home');
@@ -36,12 +37,111 @@ export default function App() {
   const [deviceMode, setDeviceMode] = useState<DeviceMode>('ios');
   const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
 
-  // App States
-  const [user, setUser] = useState<UserProfile>(INITIAL_USER);
-  const [selectedDistrict, setSelectedDistrict] = useState('Senopati, South Jakarta');
-  const [selectedCafeId, setSelectedCafeId] = useState('tanamera');
-  const [savedCafeIds, setSavedCafeIds] = useState<string[]>(['tanamera', 'giyanti']);
-  const [stamps, setStamps] = useState<string[]>([]);
+  // Cafes state backed by SQLite backend API
+  const [cafes, setCafes] = useState<Cafe[]>(MOCK_CAFES);
+
+  // App States with LocalStorage Persistence & API Synchronization
+  const [user, setUser] = useState<UserProfile>(() => {
+    try {
+      const saved = localStorage.getItem('kopifinder_user');
+      return saved ? JSON.parse(saved) : INITIAL_USER;
+    } catch {
+      return INITIAL_USER;
+    }
+  });
+
+  const [selectedDistrict, setSelectedDistrict] = useState<string>(() => {
+    return localStorage.getItem('kopifinder_district') || 'Senopati, South Jakarta';
+  });
+
+  const [selectedCafeId, setSelectedCafeId] = useState<string>('tanamera');
+
+  const [savedCafeIds, setSavedCafeIds] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('kopifinder_saved_cafes');
+      return saved ? JSON.parse(saved) : ['tanamera', 'giyanti'];
+    } catch {
+      return ['tanamera', 'giyanti'];
+    }
+  });
+
+  const [stamps, setStamps] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('kopifinder_stamps');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // Fetch initial data from SQLite REST API
+  useEffect(() => {
+    api
+      .getCafes()
+      .then((data) => {
+        if (data && data.length > 0) {
+          setCafes(data);
+        }
+      })
+      .catch((err) => console.log('Using local cafes (backend syncing):', err));
+
+    api
+      .getUser()
+      .then((userData: any) => {
+        if (userData) {
+          setUser((prev) => ({
+            ...prev,
+            name: userData.name || prev.name,
+            avatar: userData.avatar || prev.avatar,
+            level: userData.level || prev.level,
+            perkPoints: userData.perkPoints ?? prev.perkPoints,
+            cafesVisited: userData.cafesVisited ?? prev.cafesVisited,
+            roasterStamps: userData.roasterStamps ?? prev.roasterStamps,
+            reviewsLogged: userData.reviewsLogged ?? prev.reviewsLogged,
+          }));
+          if (userData.stamps && userData.stamps.length > 0) {
+            setStamps(userData.stamps);
+          }
+          if (userData.savedCafeIds && userData.savedCafeIds.length > 0) {
+            setSavedCafeIds(userData.savedCafeIds);
+          }
+        }
+      })
+      .catch((err) => console.log('Using local user stats:', err));
+  }, []);
+
+  // Sync states to LocalStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('kopifinder_user', JSON.stringify(user));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('kopifinder_saved_cafes', JSON.stringify(savedCafeIds));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [savedCafeIds]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('kopifinder_stamps', JSON.stringify(stamps));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [stamps]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('kopifinder_district', selectedDistrict);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [selectedDistrict]);
 
   // Navigation handlers
   const navigateTo = (screen: ScreenName) => {
@@ -79,6 +179,7 @@ export default function App() {
     setSavedCafeIds((prev) =>
       prev.includes(cafeId) ? prev.filter((id) => id !== cafeId) : [...prev, cafeId]
     );
+    api.toggleBookmark(cafeId).catch(console.error);
   };
 
   const handleSelectCafe = (cafeId: string) => {
@@ -89,6 +190,14 @@ export default function App() {
   const handleAddStamp = (stampName: string) => {
     if (!stamps.includes(stampName)) {
       setStamps((prev) => [...prev, stampName]);
+      setUser((prev) => ({
+        ...prev,
+        cafesVisited: prev.cafesVisited + 1,
+        perkPoints: prev.perkPoints + 150,
+        reviewsLogged: prev.reviewsLogged + 1,
+        roasterStamps: prev.roasterStamps + 1
+      }));
+      api.claimStamp(selectedCafeId, stampName).catch(console.error);
     }
   };
 
@@ -96,8 +205,8 @@ export default function App() {
     setUser((prev) => ({ ...prev, ...updated }));
   };
 
-  // Find active cafe object
-  const activeCafe = MOCK_CAFES.find((c) => c.id === selectedCafeId) || MOCK_CAFES[0];
+  // Find active cafe object from live DB state
+  const activeCafe = cafes.find((c) => c.id === selectedCafeId) || cafes[0] || MOCK_CAFES[0];
 
   // Determine which tab to highlight based on current screen
   const getActiveTab = (): TabName => {
@@ -165,8 +274,9 @@ export default function App() {
 
           {currentScreen === 'home' && (
             <HomeScreen
-              cafes={MOCK_CAFES}
+              cafes={cafes}
               savedCafeIds={savedCafeIds}
+              selectedDistrict={selectedDistrict}
               onToggleSaveCafe={handleToggleSaveCafe}
               onSelectCafe={handleSelectCafe}
               onNavigate={navigateTo}
@@ -175,7 +285,7 @@ export default function App() {
 
           {currentScreen === 'map' && (
             <MapScreen
-              cafes={MOCK_CAFES}
+              cafes={cafes}
               savedCafeIds={savedCafeIds}
               onToggleSaveCafe={handleToggleSaveCafe}
               onSelectCafe={handleSelectCafe}
@@ -194,6 +304,7 @@ export default function App() {
 
           {currentScreen === 'log-visit' && (
             <LogVisitScreen
+              cafe={activeCafe}
               onNavigate={navigateTo}
               onSubmitLog={handleAddStamp}
             />
@@ -210,6 +321,7 @@ export default function App() {
 
           {currentScreen === 'ai-rec' && (
             <AIMatchmakerScreen
+              cafes={cafes}
               onNavigate={navigateTo}
               onSelectCafe={handleSelectCafe}
             />

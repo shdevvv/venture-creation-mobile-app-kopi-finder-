@@ -59,7 +59,7 @@ export const WelcomeOnboardingScreen: React.FC<WelcomeOnboardingScreenProps> = (
               </div>
               <div className="flex flex-col min-w-0">
                 <span className="text-xs font-bold text-[#271310] truncate">Artisanal Passport Badge</span>
-                <span className="text-[11px] text-[#504442] truncate">Senopati • Menteng • BSD</span>
+                <span className="text-[11px] text-[#504442] truncate">Jaksel • Jakpus • Jakbar • Jakut • Jaktim</span>
               </div>
             </div>
             <div className="flex items-center gap-1 bg-[#213200]/10 px-2 py-1 rounded-full shrink-0">

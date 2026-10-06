@@ -4,6 +4,7 @@ import { Cafe, ScreenName } from '../types';
 interface HomeScreenProps {
   cafes: Cafe[];
   savedCafeIds: string[];
+  selectedDistrict?: string;
   onToggleSaveCafe: (cafeId: string) => void;
   onSelectCafe: (cafeId: string) => void;
   onNavigate: (screen: ScreenName) => void;
@@ -12,17 +13,24 @@ interface HomeScreenProps {
 export const HomeScreen: React.FC<HomeScreenProps> = ({
   cafes,
   savedCafeIds,
+  selectedDistrict,
   onToggleSaveCafe,
   onSelectCafe,
   onNavigate
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedChip, setSelectedChip] = useState('Study & Work');
+  const [selectedChip, setSelectedChip] = useState('All Cafes');
   const [filterModalOpen, setFilterModalOpen] = useState(false);
+
+  // Advanced Filter States
+  const [selectedPrice, setSelectedPrice] = useState<string>('all');
+  const [minRating, setMinRating] = useState<number>(0);
+  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+  const [sortBy, setSortBy] = useState<'recommended' | 'rating' | 'distance'>('recommended');
 
   const chips = [
     { id: 'all', label: 'All Cafes' },
-    { id: 'work', label: 'Study & Work', icon: 'check' },
+    { id: 'work', label: 'Study & Work', icon: 'laptop' },
     { id: 'date', label: 'Date Spot', icon: 'favorite' },
     { id: 'read', label: 'Chill & Read', icon: 'menu_book' },
     { id: 'photo', label: 'Photoshoot', icon: 'photo_camera' },
@@ -30,19 +38,82 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     { id: 'pets', label: 'Pet Friendly', icon: 'pets' }
   ];
 
-  const filteredCafes = cafes.filter((cafe) => {
-    if (!searchQuery.trim()) return true;
-    const query = searchQuery.toLowerCase();
-    return (
-      cafe.name.toLowerCase().includes(query) ||
-      cafe.neighborhood.toLowerCase().includes(query) ||
-      cafe.features.some((f) => f.toLowerCase().includes(query)) ||
-      cafe.address.toLowerCase().includes(query)
+  const activeFiltersCount = 
+    (selectedPrice !== 'all' ? 1 : 0) +
+    (minRating > 0 ? 1 : 0) +
+    selectedFeatures.length +
+    (sortBy !== 'recommended' ? 1 : 0);
+
+  const resetFilters = () => {
+    setSelectedPrice('all');
+    setMinRating(0);
+    setSelectedFeatures([]);
+    setSortBy('recommended');
+  };
+
+  const toggleFeature = (feat: string) => {
+    setSelectedFeatures((prev) => 
+      prev.includes(feat) ? prev.filter((f) => f !== feat) : [...prev, feat]
     );
-  });
+  };
+
+  const filteredCafes = cafes
+    .filter((cafe) => {
+      // Search Query
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase();
+        const matchesQuery =
+          cafe.name.toLowerCase().includes(query) ||
+          cafe.neighborhood.toLowerCase().includes(query) ||
+          cafe.features.some((f) => f.toLowerCase().includes(query)) ||
+          cafe.address.toLowerCase().includes(query);
+        if (!matchesQuery) return false;
+      }
+
+      // Quick Chips Filter
+      if (selectedChip !== 'All Cafes') {
+        const query = selectedChip.toLowerCase();
+        const matchesChip =
+          cafe.features.some((f) => f.toLowerCase().includes(query)) ||
+          (selectedChip === 'Study & Work' && (cafe.aspectRatings.wifiSpeed.includes('M') || cafe.aspectRatings.plugs.toLowerCase().includes('abundant') || cafe.aspectRatings.plugs.toLowerCase().includes('every'))) ||
+          (selectedChip === 'Artisan Roaster' && (cafe.features.some((f) => f.toLowerCase().includes('roast')) || cafe.name.toLowerCase().includes('roaster'))) ||
+          (selectedChip === 'Chill & Read' && (cafe.aspectRatings.vibe >= 4.5 || parseInt(cafe.keySpecs.noiseDb) <= 55)) ||
+          (selectedChip === 'Pet Friendly' && cafe.features.some((f) => f.toLowerCase().includes('pet')));
+        if (!matchesChip) return false;
+      }
+
+      // Price Filter
+      if (selectedPrice !== 'all') {
+        if (selectedPrice === '$' && !cafe.priceRange.includes('$ •') && !cafe.keySpecs.priceAvg.includes('25k')) return false;
+        if (selectedPrice === '$$' && !cafe.priceRange.startsWith('$$')) return false;
+        if (selectedPrice === '$$$' && !cafe.priceRange.startsWith('$$$')) return false;
+      }
+
+      // Minimum Rating Filter
+      if (minRating > 0 && cafe.rating < minRating) {
+        return false;
+      }
+
+      // Features / Amenities Filter
+      if (selectedFeatures.length > 0) {
+        for (const feat of selectedFeatures) {
+          if (feat === 'wifi' && parseInt(cafe.aspectRatings.wifiSpeed) < 50) return false;
+          if (feat === 'plugs' && !cafe.aspectRatings.plugs.toLowerCase().includes('abundant') && !cafe.aspectRatings.plugs.toLowerCase().includes('every') && !cafe.aspectRatings.plugs.toLowerCase().includes('many')) return false;
+          if (feat === 'roaster' && !cafe.features.some((f) => f.toLowerCase().includes('roast')) && !cafe.name.toLowerCase().includes('roast')) return false;
+          if (feat === 'pet' && !cafe.features.some((f) => f.toLowerCase().includes('pet'))) return false;
+        }
+      }
+
+      return true;
+    })
+    .sort((a, b) => {
+      if (sortBy === 'rating') return b.rating - a.rating;
+      if (sortBy === 'distance') return parseFloat(a.distance) - parseFloat(b.distance);
+      return 0;
+    });
 
   return (
-    <div className="flex flex-col w-full pb-28 bg-[#fdf9f3]">
+    <div className="flex flex-col w-full pb-28 bg-[#fdf9f3] relative">
       {/* Search & Filter Bar */}
       <section className="px-4 pt-2 pb-1 flex items-center gap-2">
         <div className="flex-1 flex items-center bg-[#f7f3ed] rounded-full px-4 h-12 shadow-xs transition-all focus-within:shadow-sm focus-within:bg-white border border-transparent focus-within:border-[#e6e2dc]">
@@ -74,11 +145,20 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </div>
 
         <button
-          onClick={() => setFilterModalOpen(!filterModalOpen)}
+          onClick={() => setFilterModalOpen(true)}
           aria-label="Filter options"
-          className="w-12 h-12 rounded-full bg-white text-[#271310] flex items-center justify-center shadow-[0_4px_20px_rgba(62,39,35,0.08)] active:scale-95 transition-transform shrink-0 border border-[#e6e2dc]"
+          className={`w-12 h-12 rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(62,39,35,0.08)] active:scale-95 transition-all shrink-0 border relative cursor-pointer ${
+            activeFiltersCount > 0
+              ? 'bg-[#3e2723] text-[#ffdcbd] border-[#3e2723]'
+              : 'bg-white text-[#271310] border-[#e6e2dc] hover:bg-[#f7f3ed]'
+          }`}
         >
           <span className="material-symbols-outlined text-[22px]">tune</span>
+          {activeFiltersCount > 0 && (
+            <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#c8f17a] text-[#131f00] rounded-full text-[10px] font-black flex items-center justify-center shadow-xs">
+              {activeFiltersCount}
+            </span>
+          )}
         </button>
       </section>
 
@@ -148,16 +228,17 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       <section className="px-4 pt-4 pb-2 flex items-center justify-between">
         <div>
           <h1 className="font-headline-md text-base sm:text-lg font-bold text-[#271310]">
-            Trending Near You
+            Trending in {selectedDistrict ? selectedDistrict.split(',')[0] : 'Jakarta'}
           </h1>
           <p className="text-xs text-[#504442]">Selected by local roasters & remote workers</p>
         </div>
         <button
-          onClick={() => onNavigate('map')}
-          className="text-xs font-bold text-[#7d562d] flex items-center gap-0.5 hover:underline"
+          onClick={() => onNavigate('districts')}
+          className="text-xs font-bold text-[#7d562d] flex items-center gap-0.5 hover:underline cursor-pointer"
+          title="Ganti Wilayah"
         >
-          <span>Map View</span>
-          <span className="material-symbols-outlined text-[17px]">map</span>
+          <span>Ganti Wilayah</span>
+          <span className="material-symbols-outlined text-[15px]">location_city</span>
         </button>
       </section>
 
@@ -183,12 +264,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                     <span className="w-2 h-2 rounded-full bg-[#add461]"></span>
                     {cafe.hours}
                   </span>
-                  {cafe.id === 'tanamera' && (
+                  {cafe.rating >= 4.9 && (
                     <span className="px-2.5 py-1 rounded-full bg-[#ffca98]/95 backdrop-blur-md text-[#7a532a] text-[11px] font-bold shadow-xs">
                       Staff Choice
                     </span>
                   )}
-                  {cafe.id === 'giyanti' && (
+                  {cafe.verified && cafe.rating < 4.9 && (
                     <span className="px-2.5 py-1 rounded-full bg-[#213200]/90 backdrop-blur-md text-[#c8f17a] text-[11px] font-bold shadow-xs">
                       Top Roaster
                     </span>
@@ -330,6 +411,172 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           </button>
         </div>
       </section>
+
+      {/* ======================================================== */}
+      {/* FILTER BOTTOM SHEET / MODAL                             */}
+      {/* ======================================================== */}
+      {filterModalOpen && (
+        <div className="absolute inset-0 z-50 bg-black/50 backdrop-blur-xs flex flex-col justify-end animate-in fade-in duration-200">
+          {/* Backdrop click to close */}
+          <div 
+            className="flex-1"
+            onClick={() => setFilterModalOpen(false)}
+          />
+
+          {/* Modal Container */}
+          <div className="bg-[#fdf9f3] rounded-t-3xl p-5 shadow-2xl max-h-[85%] overflow-y-auto space-y-5 border-t border-[#e6e2dc] animate-in slide-in-from-bottom duration-300">
+            {/* Modal Handle & Header */}
+            <div>
+              <div className="w-12 h-1 bg-[#d3c3c0] rounded-full mx-auto mb-3" />
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-headline-md text-base font-bold text-[#271310]">
+                    Filter & Preferensi Kafe
+                  </h3>
+                  <p className="text-xs text-[#504442]">Sesuaikan dengan kebutuhan ngopi atau kerja Anda</p>
+                </div>
+                <button
+                  onClick={() => setFilterModalOpen(false)}
+                  className="w-8 h-8 rounded-full bg-[#f1ede7] text-[#504442] hover:text-[#271310] flex items-center justify-center cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-[18px]">close</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Sort By */}
+            <div>
+              <label className="text-xs font-bold text-[#271310] block mb-2">
+                Urutkan Berdasarkan
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { id: 'recommended', label: 'Rekomendasi' },
+                  { id: 'rating', label: 'Rating Tertinggi' },
+                  { id: 'distance', label: 'Terdekat' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setSortBy(item.id as any)}
+                    className={`py-2 px-2 rounded-xl text-xs font-semibold text-center transition-all cursor-pointer ${
+                      sortBy === item.id
+                        ? 'bg-[#3e2723] text-white shadow-xs'
+                        : 'bg-white text-[#504442] border border-[#e6e2dc] hover:bg-[#f7f3ed]'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Price Range */}
+            <div>
+              <label className="text-xs font-bold text-[#271310] block mb-2">
+                Kisaran Harga
+              </label>
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { id: 'all', label: 'Semua' },
+                  { id: '$', label: '$ (Hemat)' },
+                  { id: '$$', label: '$$ (Sedang)' },
+                  { id: '$$$', label: '$$$ (Premium)' },
+                ].map((price) => (
+                  <button
+                    key={price.id}
+                    onClick={() => setSelectedPrice(price.id)}
+                    className={`py-2 px-1 rounded-xl text-xs font-semibold text-center transition-all cursor-pointer ${
+                      selectedPrice === price.id
+                        ? 'bg-[#3e2723] text-white shadow-xs'
+                        : 'bg-white text-[#504442] border border-[#e6e2dc] hover:bg-[#f7f3ed]'
+                    }`}
+                  >
+                    {price.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Minimum Rating */}
+            <div>
+              <label className="text-xs font-bold text-[#271310] block mb-2">
+                Rating Minimal
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { value: 0, label: 'Semua' },
+                  { value: 4.5, label: '⭐ 4.5+' },
+                  { value: 4.8, label: '⭐ 4.8+' },
+                ].map((r) => (
+                  <button
+                    key={r.value}
+                    onClick={() => setMinRating(r.value)}
+                    className={`py-2 px-2 rounded-xl text-xs font-semibold text-center transition-all cursor-pointer ${
+                      minRating === r.value
+                        ? 'bg-[#3e2723] text-white shadow-xs'
+                        : 'bg-white text-[#504442] border border-[#e6e2dc] hover:bg-[#f7f3ed]'
+                    }`}
+                  >
+                    {r.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Amenities & Features */}
+            <div>
+              <label className="text-xs font-bold text-[#271310] block mb-2">
+                Fasilitas & Karakteristik
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { id: 'wifi', label: '⚡ Wi-Fi Kencang (>50M)' },
+                  { id: 'plugs', label: '🔌 Banyak Colokan' },
+                  { id: 'roaster', label: '☕ In-house Roastery' },
+                  { id: 'pet', label: '🐾 Pet Friendly' },
+                ].map((feat) => {
+                  const isChecked = selectedFeatures.includes(feat.id);
+                  return (
+                    <button
+                      key={feat.id}
+                      onClick={() => toggleFeature(feat.id)}
+                      className={`p-2.5 rounded-xl text-xs font-medium text-left transition-all flex items-center justify-between cursor-pointer ${
+                        isChecked
+                          ? 'bg-[#ffdcbd]/70 text-[#2c1600] font-bold border border-[#7d562d]/40'
+                          : 'bg-white text-[#504442] border border-[#e6e2dc] hover:bg-[#f7f3ed]'
+                      }`}
+                    >
+                      <span>{feat.label}</span>
+                      <span className="material-symbols-outlined text-[16px]">
+                        {isChecked ? 'check_box' : 'check_box_outline_blank'}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="pt-2 flex items-center gap-3">
+              <button
+                onClick={resetFilters}
+                className="flex-1 py-3 px-4 rounded-2xl bg-[#f1ede7] text-[#504442] font-bold text-xs hover:bg-[#ebe8e2] transition-colors cursor-pointer"
+              >
+                Reset
+              </button>
+              <button
+                onClick={() => setFilterModalOpen(false)}
+                className="flex-[2] py-3 px-4 rounded-2xl bg-[#3e2723] text-[#ffdcbd] font-bold text-xs shadow-md hover:bg-[#271310] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Terapkan Filter</span>
+                <span className="px-2 py-0.5 rounded-full bg-[#c8f17a] text-[#131f00] text-[10px] font-black">
+                  {filteredCafes.length} Kafe
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

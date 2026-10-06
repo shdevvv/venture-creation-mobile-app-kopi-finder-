@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ScreenName } from '../types';
+import { MOCK_BEAN_STORY } from '../data/mockData';
 
 interface BeanStoryScreenProps {
   onNavigate: (screen: ScreenName) => void;
@@ -10,6 +11,7 @@ export const BeanStoryScreen: React.FC<BeanStoryScreenProps> = ({
   onNavigate,
   onSelectCafe
 }) => {
+  const story = MOCK_BEAN_STORY;
   const [isSaved, setIsSaved] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isRouting, setIsRouting] = useState(false);
@@ -18,7 +20,7 @@ export const BeanStoryScreen: React.FC<BeanStoryScreenProps> = ({
     setIsRouting(true);
     setTimeout(() => {
       setIsRouting(false);
-      onSelectCafe('anomali');
+      onSelectCafe(story.roasteryId);
     }, 600);
   };
 
@@ -29,7 +31,7 @@ export const BeanStoryScreen: React.FC<BeanStoryScreenProps> = ({
         <div className="flex items-center gap-1.5">
           <span className="inline-flex items-center justify-center w-2 h-2 rounded-full bg-[#7d562d] animate-pulse"></span>
           <span className="text-[10px] font-bold uppercase tracking-wider text-[#7d562d]">
-            Daily Staff Pick • Monday Edition
+            {story.edition}
           </span>
         </div>
 
@@ -37,20 +39,20 @@ export const BeanStoryScreen: React.FC<BeanStoryScreenProps> = ({
           <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'FILL' 1" }}>
             verified
           </span>
-          <span className="text-[10px] font-bold">Lot #24-FBR</span>
+          <span className="text-[10px] font-bold">{story.lotCode}</span>
         </div>
       </div>
 
       {/* Editorial Headline Section */}
       <div className="px-4 mt-1 mb-3">
         <h2 className="font-display-lg text-2xl sm:text-3xl font-bold text-[#271310] tracking-tight leading-tight mb-1">
-          Flores Bajawa Anaerobic Natural
+          {story.beanName}
         </h2>
         <p className="text-xs text-[#504442] flex items-center gap-1.5 flex-wrap">
           <span>Roasted by</span>
-          <span className="font-bold text-[#271310]">Anomali Coffee Roastery</span>
+          <span className="font-bold text-[#271310]">{story.roasteryName}</span>
           <span className="inline-block w-1 h-1 rounded-full bg-[#d3c3c0]"></span>
-          <span className="text-[#7d562d] font-semibold">Jakarta</span>
+          <span className="text-[#7d562d] font-semibold">{story.roasteryLocation}</span>
         </p>
 
         {/* Curator Endorsement Tag */}

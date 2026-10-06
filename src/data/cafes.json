@@ -1,0 +1,502 @@
+[
+  {
+    "id": "tanamera",
+    "name": "Tanamera Specialty Roastery",
+    "verified": true,
+    "address": "Jl. Senopati No. 84, Kebayoran Baru, South Jakarta",
+    "neighborhood": "Senopati",
+    "distance": "350m",
+    "priceRange": "$$ • Moderate",
+    "hours": "Open until 10 PM",
+    "isOpen": true,
+    "rating": 4.9,
+    "reviewCount": 342,
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAnsiSNdcWHKAHxZl-L1AtJPhQzwdS-dsxkLsZycNIgHoofI--fWcgeqLHknZcQ41B6LZvvY8FilR_MJmDvTKxWMY-mRTzDGWIOdTS4YRfGjHVYqAQeh_Kmi24mUrQT1kKX9zYWGHq_jYYeNP_6Kf37aTsGa8m4NCVeIwvSagN1-QNKTgYITw4f5IxXKAgG5HcOJOPMrHKPiqHQUm7yenbnhEqZmK81osZoA9_lJslRUXGX7phon5pVpQ",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDwPui2FBqgW1Omfhn4P1w4OWQjtgSRZEe9IpfZgGMRI94vtrZFHucGa8I-mSI5JILTX8MezJ_3R-41i7bkuxYNsRiJNiyM-hyipRa9Ag-RigdK1SPtci4OXtAR8ikkGmdU9u805nu5XBGxjh0qy58al611CDdowTsYzMNqVRIF-0QYeR_eQSvumrMjOh3S6nMBder6UOhxypItaCC6oTR7O0EOkwcOrN1FJQ30Whbj8c2hhCmxQjchPQ",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAwXnzXHV_dGwnlfp-AUiI-4GTC9tAaiww8SgGluWZksOmn2PgL6Q2c4WkmtTLuuYsUfDLHZCRbz_eYYy8nFmKJWvbCTV2Nrlr7yPwsv-FBDLSBQFooPMSE-PPITk4MFJDzedPCa9Z_LDk8XCZ3jKk5j4qyq6ZXeth--rmwaHVKfSwy5jFhA9M0QtYz6c7CHhiWhhiykYheDApOYaDdHiQx1zG28bt6O8ICx2la4nt2QoqvTOROWHer1A"
+    ],
+    "keySpecs": {
+      "priceAvg": "35k - 65k",
+      "wifiSpeed": "110 Mbps",
+      "wifiLabel": "Dedicated Fiber",
+      "noiseDb": "54 dB",
+      "noiseLabel": "Moderate Chill"
+    },
+    "features": [
+      "Micro-batch Roasting",
+      "Plugs Everywhere",
+      "Pet Friendly"
+    ],
+    "aspectRatings": {
+      "coffee": 4.9,
+      "vibe": 4.8,
+      "wifiSpeed": "95M",
+      "plugs": "Abundant",
+      "service": 4.7
+    },
+    "ratingBreakdown": {
+      "coffee": { "score": 4.9, "percent": 98 },
+      "ambience": { "score": 4.9, "percent": 96 },
+      "barista": { "score": 4.6, "percent": 92 },
+      "wifi": { "score": 4.8, "percent": 95 },
+      "value": { "score": 4.3, "percent": 86 }
+    },
+    "lat": -6.2305,
+    "lng": 106.8095,
+    "menu": [
+      {
+        "id": "m1",
+        "name": "Aceh Gayo Triple-Pick Anaerobic V60",
+        "category": "manual-brew",
+        "badge": "Signature / Best Seller",
+        "badgeType": "best-seller",
+        "description": "Light roast processed with 72h oxygen-free fermentation. Crisp, tea-like finish.",
+        "price": "IDR 48k",
+        "tastingNotes": ["Jasmine Florals", "Red Apple", "Dark Honey"]
+      },
+      {
+        "id": "m2",
+        "name": "Cold Drip Reserve (18h steep)",
+        "category": "manual-brew",
+        "badge": "Staff Pick",
+        "badgeType": "staff-pick",
+        "description": "Single-origin Flores Bajawa slow-extracted drop-by-drop over iced volcanic water.",
+        "price": "IDR 45k",
+        "tastingNotes": ["Dark Cacao", "Blackcurrant", "Bourbon Vanilla"]
+      },
+      {
+        "id": "m3",
+        "name": "Flat White with Oat Milk",
+        "category": "coffee",
+        "description": "House espresso blend paired with silky steamed Minor Figures oat milk.",
+        "price": "IDR 42k",
+        "tastingNotes": ["Caramel Fudge", "Toasted Hazelnut"]
+      }
+    ]
+  },
+  {
+    "id": "giyanti",
+    "name": "Giyanti Coffee Roastery",
+    "verified": true,
+    "address": "Jl. Surabaya No. 20, Menteng, Central Jakarta",
+    "neighborhood": "Menteng",
+    "distance": "1.2km",
+    "priceRange": "$$$ • Artisanal",
+    "hours": "Open until 8 PM",
+    "isOpen": true,
+    "rating": 4.8,
+    "reviewCount": 518,
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuA-r6NrO6H5tTWD5LG6BIh6be1kKKcLXUSDQW-HdC21NUrXNvFWr19Y_J9MH97lS8R1lv42mZb4sgs0EVB3CHaJ-6iOrGJ7d3z8JcpVQK7je-e94tURB0xgc6lCa3tvVJQCfIgzWZdbariUAiFxjnWLkcsIP_VKWAJGtZjTIpzRCzCBWYSBUH22q85dZDKacPVqy3-QYFMZV-DK7oxzim9GOTjXrxW3fuP2Rlryh_ZiRC67Fbg0LZ-67w",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuB7pt5g8wkxS6GcYSfRnavEgpQunrlhLehyvMDOogG98_KVHxsNhlzRDwIAhjJa_sJYJcRSXr0_6qxszwzraMxpZiO7K3LVHAI8i9rdiFSTJSp4wmm5diJPYEekJSFhuEFxxi0POwKvyiegUgdDHrU1xTIkAeJCls4Muo02gn9rHzqy_eUnHpvU1oVrp5eyowB68TiEJP4Wuxfid0lRx14gMr1TL2OWYoFvjvoowbAT-6knPqpT3mWrRQ"
+    ],
+    "keySpecs": {
+      "priceAvg": "45k - 85k",
+      "wifiSpeed": "70 Mbps",
+      "wifiLabel": "Stable Wi-Fi",
+      "noiseDb": "48 dB",
+      "noiseLabel": "Quiet Patio"
+    },
+    "features": [
+      "Specialty V60",
+      "Garden Patio",
+      "Artisan Bakery"
+    ],
+    "aspectRatings": {
+      "coffee": 5.0,
+      "vibe": 4.9,
+      "wifiSpeed": "70M",
+      "plugs": "Patio",
+      "service": 4.8
+    },
+    "ratingBreakdown": {
+      "coffee": { "score": 5.0, "percent": 100 },
+      "ambience": { "score": 4.9, "percent": 97 },
+      "barista": { "score": 4.8, "percent": 94 },
+      "wifi": { "score": 4.2, "percent": 84 },
+      "value": { "score": 4.4, "percent": 88 }
+    },
+    "lat": -6.1985,
+    "lng": 106.8402,
+    "menu": [
+      {
+        "id": "g1",
+        "name": "Giyanti Roast Padang Solok",
+        "category": "manual-brew",
+        "badge": "Roaster Heritage",
+        "description": "West Sumatra high plateau bean roasted light-medium for stone-fruit sweetness.",
+        "price": "IDR 52k",
+        "tastingNotes": ["Apricot", "Cinnamon", "Cane Sugar"]
+      }
+    ]
+  },
+  {
+    "id": "anomali",
+    "name": "Anomali Coffee Roastery",
+    "verified": true,
+    "address": "Jl. Senopati No. 19, Kebayoran Baru, South Jakarta",
+    "neighborhood": "Senopati",
+    "distance": "800m",
+    "priceRange": "$$ • Standard",
+    "hours": "Open until 11 PM",
+    "isOpen": true,
+    "rating": 4.7,
+    "reviewCount": 289,
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDPwyWU9n7KuM7Z1cTKXVSy9UvLXkJU7YGCNMGhzbNBoCwFX2DWJqnGKQ4yQyE24VbutJoPqZcMboEfgt_JeEtXkYHPSneLZMZQT4V_jkuyjRQHjZGfrdmjYX5XU6yEL7bIkJjyK9aXGnCZj9d9yDEWLXq-Nw0nl9u66Ask5wx_C7cON3ofOnOKIhp6xNnlOm4DiAzCDGOegciG12NVVb7DigVAZ6a4JyvmJg7dMIl5dz7HvIHdJrSI6A"
+    ],
+    "keySpecs": {
+      "priceAvg": "35k - 60k",
+      "wifiSpeed": "120 Mbps",
+      "wifiLabel": "Ultra Fast",
+      "noiseDb": "58 dB",
+      "noiseLabel": "Vibrant Buzz"
+    },
+    "features": [
+      "Toraja Kalosi",
+      "Silent Room",
+      "Meeting Table"
+    ],
+    "aspectRatings": {
+      "coffee": 4.8,
+      "vibe": 4.6,
+      "wifiSpeed": "120M",
+      "plugs": "Every desk",
+      "service": 4.6
+    },
+    "ratingBreakdown": {
+      "coffee": { "score": 4.8, "percent": 96 },
+      "ambience": { "score": 4.6, "percent": 91 },
+      "barista": { "score": 4.6, "percent": 92 },
+      "wifi": { "score": 4.9, "percent": 98 },
+      "value": { "score": 4.7, "percent": 94 }
+    },
+    "lat": -6.233,
+    "lng": 106.812,
+    "menu": [
+      {
+        "id": "a1",
+        "name": "Toraja Sapan Single Origin",
+        "category": "manual-brew",
+        "badge": "Classic Single Origin",
+        "description": "Sulawesi heritage lot with full syrupy body and herbal sweet cedar finish.",
+        "price": "IDR 44k",
+        "tastingNotes": ["Herbal Cedar", "Dark Chocolate", "Ripe Lime"]
+      }
+    ]
+  },
+  {
+    "id": "kroma",
+    "name": "Kroma Studio & Roastery",
+    "verified": true,
+    "address": "Jl. Senopati Mezzanine No. 12, South Jakarta",
+    "neighborhood": "Senopati",
+    "distance": "450m",
+    "priceRange": "$$ • Moderate",
+    "hours": "Open until 9 PM",
+    "isOpen": true,
+    "rating": 4.9,
+    "reviewCount": 215,
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAqrNeL8DX5mFTL4NXDVsO5uUnasQxILGvjagIyVg35WOLip9Jfb2A2KDSG62iSo9u-OEkjQ0PjehMb6Ve5JAb6pWmJHfK-RcpZSi4aPQNgMvJtylAX7z8OFFMlzdzT7XN_SajLdT4ZIjgTAplm_BsuSmhyyMgex_5fJKfjUzBDjf7oM70jooa0z2gyaqB3xv6wF3sKYhB8LVYORSGNgJ2duDGnLbjrLTbi6sffmPkp0oSvIFJ0IaA2tg",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDZMy-uN_84UHpwIXJi6-FozARcETZak4Hq4gF3Y8AXZ-6gPVIXp_25sV3RYA-scAXhxQD8jzAPZpmdzh9SNkaPAADRlkRtBZvsizCA9uRsjuqTeZ8UKyR4FprN_TfA1ijptL3KZ5y3NxvJSdYlt2TSXENCF7tIbMNV7tmMdIp46XYVPL8SW88ESntvXJe4hAUXfB2ku2mROXvVMJkBjsW3bfltyFgtCzg9J6wk_Q8AlJYQwwcSIeF-4Q"
+    ],
+    "keySpecs": {
+      "priceAvg": "38k - 58k",
+      "wifiSpeed": "118 Mbps",
+      "wifiLabel": "Low Latency",
+      "noiseDb": "51 dB",
+      "noiseLabel": "Whisper Quiet"
+    },
+    "features": [
+      "Universal Outlets",
+      "Quiet Focus Zone",
+      "Specialty Pastries"
+    ],
+    "aspectRatings": {
+      "coffee": 4.9,
+      "vibe": 5.0,
+      "wifiSpeed": "118M",
+      "plugs": "100% Sockets",
+      "service": 4.8
+    },
+    "ratingBreakdown": {
+      "coffee": { "score": 4.9, "percent": 98 },
+      "ambience": { "score": 5.0, "percent": 100 },
+      "barista": { "score": 4.7, "percent": 93 },
+      "wifi": { "score": 4.9, "percent": 98 },
+      "value": { "score": 4.5, "percent": 90 }
+    },
+    "lat": -6.236,
+    "lng": 106.808,
+    "menu": [
+      {
+        "id": "k1",
+        "name": "Kerinci Honey Pour-over",
+        "category": "manual-brew",
+        "badge": "Recommended Pour",
+        "description": "Peach, jasmine, and cane sugar sweetness extracted at 92°C.",
+        "price": "IDR 45k",
+        "tastingNotes": ["Peach", "Jasmine", "Cane Sugar"]
+      }
+    ]
+  },
+  {
+    "id": "two-roasters",
+    "name": "Two Roasters Senopati",
+    "verified": true,
+    "address": "Jl. Senopati No. 42, Kebayoran Baru, South Jakarta",
+    "neighborhood": "Senopati",
+    "distance": "400m",
+    "priceRange": "$$ • Moderate",
+    "hours": "Open until 9 PM",
+    "isOpen": true,
+    "rating": 4.8,
+    "reviewCount": 198,
+    "images": [
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBFBW7FmY2qDWduQZ_MpCmtx8ghSwVVb_5RGMaB4GedMrtRvP0Ii1XRuLHvM2wuApEEudemrTfKWUKVVWjSvkdyWnuwTzataw7V0vEyCfn6SoaiW-9PJBbPzIdazMiiWSrHIFM8lgygj5yI2HwZiA9REXpnm-on7L2tsY69eAz1ziKpKqOw1flHqlMb6lJFJAilYHXcwuv4k4RdW6L5f_3ARELyccFgFam_L7IRUGv-as1YyyQ2v1FBUQ"
+    ],
+    "keySpecs": {
+      "priceAvg": "35k - 60k",
+      "wifiSpeed": "105 Mbps",
+      "wifiLabel": "High Speed",
+      "noiseDb": "53 dB",
+      "noiseLabel": "Cozy Atmosphere"
+    },
+    "features": [
+      "B1G1 Voucher Partner",
+      "Kalita Wave",
+      "Micro-lots"
+    ],
+    "aspectRatings": {
+      "coffee": 4.9,
+      "vibe": 4.7,
+      "wifiSpeed": "105M",
+      "plugs": "Every table",
+      "service": 4.8
+    },
+    "ratingBreakdown": {
+      "coffee": { "score": 4.9, "percent": 97 },
+      "ambience": { "score": 4.7, "percent": 94 },
+      "barista": { "score": 4.8, "percent": 96 },
+      "wifi": { "score": 4.8, "percent": 95 },
+      "value": { "score": 4.6, "percent": 92 }
+    },
+    "lat": -6.231,
+    "lng": 106.81,
+    "menu": [
+      {
+        "id": "tr1",
+        "name": "Ethiopia Yirgacheffe Washed",
+        "category": "manual-brew",
+        "badge": "Voucher Eligible",
+        "description": "Floral jasmine tea with bright bergamot and lemon curd finish.",
+        "price": "IDR 48k",
+        "tastingNotes": ["Bergamot", "Jasmine", "Lemon Peel"]
+      }
+    ]
+  },
+  {
+    "id": "kyo-coffee-jaktim",
+    "name": "Kyo Coffee",
+    "verified": true,
+    "address": "Jl. Wirajasa No. 1, Cipinang Melayu, Makasar, Jakarta Timur",
+    "neighborhood": "Rawamangun & Jatiwaringin",
+    "distance": "2.4 km",
+    "priceRange": "$$ • Moderate",
+    "hours": "Open until 9 PM",
+    "isOpen": true,
+    "rating": 4.8,
+    "reviewCount": 428,
+    "images": [
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800",
+      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800"
+    ],
+    "keySpecs": {
+      "priceAvg": "35k - 60k",
+      "wifiSpeed": "95 Mbps",
+      "wifiLabel": "Dedicated Fiber",
+      "noiseDb": "46 dB",
+      "noiseLabel": "Quiet Zen"
+    },
+    "features": [
+      "Japanese Slow-Bar",
+      "Plugs Everywhere",
+      "Pet Friendly",
+      "Outdoor Zen Garden"
+    ],
+    "aspectRatings": {
+      "coffee": 4.9,
+      "vibe": 4.9,
+      "wifiSpeed": "95M",
+      "plugs": "Abundant",
+      "service": 4.7
+    },
+    "ratingBreakdown": {
+      "coffee": { "score": 4.9, "percent": 98 },
+      "ambience": { "score": 4.9, "percent": 98 },
+      "barista": { "score": 4.7, "percent": 94 },
+      "wifi": { "score": 4.6, "percent": 92 },
+      "value": { "score": 4.5, "percent": 90 }
+    },
+    "lat": -6.2625,
+    "lng": 106.8992,
+    "menu": [
+      {
+        "id": "m-kyo-1",
+        "name": "Tokyo Slow-Drip V60",
+        "category": "manual-brew",
+        "badge": "Signature",
+        "badgeType": "best-seller",
+        "description": "Single origin Flores Bajawa slow-drip V60 with silky mouthfeel and sweet peach finish.",
+        "price": "IDR 42k",
+        "tastingNotes": ["Jasmine Florals", "White Peach", "Dark Honey"]
+      },
+      {
+        "id": "m-kyo-2",
+        "name": "Iced Oat Flat White",
+        "category": "coffee",
+        "badge": "Staff Pick",
+        "badgeType": "staff-pick",
+        "description": "Double ristretto espresso paired with Minor Figures Oat Milk.",
+        "price": "IDR 38k",
+        "tastingNotes": ["Caramel Fudge", "Roasted Hazelnut"]
+      }
+    ]
+  },
+  {
+    "id": "calibrate-coffee-jakbar",
+    "name": "Calibrate Coffee",
+    "verified": true,
+    "address": "Jl. Puri Kencana Blok K7 No. 2, Kembangan, Jakarta Barat",
+    "neighborhood": "Puri Indah & Tanjung Duren",
+    "distance": "3.8 km",
+    "priceRange": "$$ • Moderate",
+    "hours": "Open until 9 PM",
+    "isOpen": true,
+    "rating": 4.8,
+    "reviewCount": 380,
+    "images": [
+      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800",
+      "https://images.unsplash.com/photo-1497636577773-f1231844b336?w=800"
+    ],
+    "keySpecs": {
+      "priceAvg": "38k - 65k",
+      "wifiSpeed": "115 Mbps",
+      "wifiLabel": "High Speed Fiber",
+      "noiseDb": "50 dB",
+      "noiseLabel": "Chill Workspace"
+    },
+    "features": [
+      "Specialty Filter Coffee",
+      "Plugs Everywhere",
+      "Artisan Brunch",
+      "Meeting Spot"
+    ],
+    "aspectRatings": {
+      "coffee": 4.9,
+      "vibe": 4.8,
+      "wifiSpeed": "115M",
+      "plugs": "Every Table",
+      "service": 4.7
+    },
+    "ratingBreakdown": {
+      "coffee": { "score": 4.9, "percent": 98 },
+      "ambience": { "score": 4.8, "percent": 96 },
+      "barista": { "score": 4.7, "percent": 94 },
+      "wifi": { "score": 4.8, "percent": 96 },
+      "value": { "score": 4.4, "percent": 88 }
+    },
+    "lat": -6.1884,
+    "lng": 106.7512,
+    "menu": [
+      {
+        "id": "m-cal-1",
+        "name": "Panama Boquete Washed V60",
+        "category": "manual-brew",
+        "badge": "Reserve Lot",
+        "badgeType": "staff-pick",
+        "description": "High elevation Geisha lot with crisp citrus acidity and floral jasmine blossom aroma.",
+        "price": "IDR 65k",
+        "tastingNotes": ["Bergamot", "Jasmine Blossom", "Meyer Lemon"]
+      },
+      {
+        "id": "m-cal-2",
+        "name": "Magic (Double Ristretto Flat White)",
+        "category": "coffee",
+        "badge": "Melbourne Style",
+        "badgeType": "best-seller",
+        "description": "Melbourne staple 3/4 flat white with intense sweetness and velvet texture.",
+        "price": "IDR 40k",
+        "tastingNotes": ["Milk Chocolate", "Toffee", "Almond"]
+      }
+    ]
+  },
+  {
+    "id": "six-ounces-jakut",
+    "name": "Six Ounces Coffee Kelapa Gading",
+    "verified": true,
+    "address": "Jl. Kelapa Puan Timur 2 Blok NB2 No. 1, Kelapa Gading, Jakarta Utara",
+    "neighborhood": "Kelapa Gading & PIK",
+    "distance": "4.2 km",
+    "priceRange": "$$$ • Artisanal",
+    "hours": "Open until 10 PM",
+    "isOpen": true,
+    "rating": 4.9,
+    "reviewCount": 610,
+    "images": [
+      "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=800",
+      "https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800"
+    ],
+    "keySpecs": {
+      "priceAvg": "45k - 85k",
+      "wifiSpeed": "90 Mbps",
+      "wifiLabel": "Stable Business Wi-Fi",
+      "noiseDb": "55 dB",
+      "noiseLabel": "Lively Brasserie"
+    },
+    "features": [
+      "Micro Roastery",
+      "Specialty Manual Brew",
+      "Outdoor Dining",
+      "Pet Friendly"
+    ],
+    "aspectRatings": {
+      "coffee": 5.0,
+      "vibe": 4.9,
+      "wifiSpeed": "90M",
+      "plugs": "Plentiful",
+      "service": 4.9
+    },
+    "ratingBreakdown": {
+      "coffee": { "score": 5.0, "percent": 100 },
+      "ambience": { "score": 4.9, "percent": 98 },
+      "barista": { "score": 4.9, "percent": 98 },
+      "wifi": { "score": 4.5, "percent": 90 },
+      "value": { "score": 4.6, "percent": 92 }
+    },
+    "lat": -6.1601,
+    "lng": 106.9077,
+    "menu": [
+      {
+        "id": "m-six-1",
+        "name": "Gayo Wine Process Filter V60",
+        "category": "manual-brew",
+        "badge": "Signature Roast",
+        "badgeType": "best-seller",
+        "description": "Controlled anaerobic dry fermentation delivering deep red grape and black cherry aroma.",
+        "price": "IDR 50k",
+        "tastingNotes": ["Red Grape", "Black Cherry", "Dark Chocolate"]
+      },
+      {
+        "id": "m-six-2",
+        "name": "Piccolo Latte",
+        "category": "coffee",
+        "description": "Single ristretto pulled on Synesso MVP Hydra with silky steamed fresh milk.",
+        "price": "IDR 38k",
+        "tastingNotes": ["Brown Butter", "Caramelized Sugar"]
+      }
+    ]
+  }
+]

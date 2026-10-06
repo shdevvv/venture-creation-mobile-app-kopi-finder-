@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { ScreenName } from '../types';
+import { Cafe, ScreenName } from '../types';
+import { MOCK_CAFES } from '../data/mockData';
 
 interface AIMatchmakerScreenProps {
+  cafes?: Cafe[];
   onNavigate: (screen: ScreenName) => void;
   onSelectCafe: (cafeId: string) => void;
 }
 
 export const AIMatchmakerScreen: React.FC<AIMatchmakerScreenProps> = ({
+  cafes = MOCK_CAFES,
   onNavigate,
   onSelectCafe
 }) => {
@@ -21,6 +24,7 @@ export const AIMatchmakerScreen: React.FC<AIMatchmakerScreenProps> = ({
   const [brewMethod, setBrewMethod] = useState<'v60' | 'espresso' | 'cold-drip'>('v60');
   const [isMatching, setIsMatching] = useState(false);
   const [matchScore, setMatchScore] = useState(98);
+  const [matchedCafeId, setMatchedCafeId] = useState<string>(cafes[0]?.id || 'tanamera');
 
   const moods = [
     'Work & Deep Focus',
@@ -50,9 +54,66 @@ export const AIMatchmakerScreen: React.FC<AIMatchmakerScreenProps> = ({
     setIsMatching(true);
     setTimeout(() => {
       setIsMatching(false);
-      setMatchScore(97 + Math.floor(Math.random() * 3));
+
+      // Dynamic intelligent recommendation matching
+      let bestCafe = cafes[0];
+      let highestScore = -1;
+
+      cafes.forEach((c) => {
+        let score = 50;
+
+        // Mood affinity
+        if (mood === 'Work & Deep Focus') {
+          if (parseInt(c.aspectRatings.wifiSpeed) >= 80) score += 20;
+          if (c.aspectRatings.plugs.toLowerCase().includes('abundant') || c.aspectRatings.plugs.toLowerCase().includes('100%')) score += 15;
+          if (parseInt(c.keySpecs.noiseDb) <= 55) score += 10;
+        } else if (mood === 'Casual Date') {
+          if (c.aspectRatings.vibe >= 4.8) score += 25;
+          if (c.aspectRatings.coffee >= 4.8) score += 15;
+        } else if (mood === 'Book Reading') {
+          if (parseInt(c.keySpecs.noiseDb) <= 53) score += 30;
+          score += c.aspectRatings.vibe * 4;
+        } else if (mood === 'Espresso Tasting') {
+          if (c.features.some((f) => f.toLowerCase().includes('roast'))) score += 30;
+          score += c.aspectRatings.coffee * 5;
+        } else {
+          score += c.aspectRatings.vibe * 4 + c.aspectRatings.coffee * 4;
+        }
+
+        // Amenities match
+        amenities.forEach((a) => {
+          if (a.includes('Wi-Fi') && parseInt(c.aspectRatings.wifiSpeed) >= 70) score += 6;
+          if (a.includes('Outlets') && !c.aspectRatings.plugs.toLowerCase().includes('few')) score += 6;
+          if (a.includes('Quiet') && parseInt(c.keySpecs.noiseDb) <= 56) score += 6;
+          if (a.includes('Garden') && c.features.some((f) => f.toLowerCase().includes('pet') || f.toLowerCase().includes('outdoor'))) score += 6;
+        });
+
+        // Price range affinity
+        if (budget === '<35k' && (c.priceRange.includes('$ •') || c.keySpecs.priceAvg.includes('25k'))) score += 15;
+        if (budget === '35k-50k' && c.priceRange.includes('$$')) score += 15;
+        if (budget === '>80k' && c.priceRange.includes('$$$')) score += 15;
+
+        if (score > highestScore) {
+          highestScore = score;
+          bestCafe = c;
+        }
+      });
+
+      setMatchedCafeId(bestCafe.id);
+      setMatchScore(94 + Math.floor(Math.random() * 5));
     }, 600);
   };
+
+  const matchedCafe = cafes.find((c) => c.id === matchedCafeId) || cafes[0];
+
+  // Dynamic recommended pour based on brewMethod
+  const recommendedPour =
+    matchedCafe.menu.find((m) => {
+      if (brewMethod === 'v60') return m.category === 'manual-brew' || m.name.toLowerCase().includes('v60');
+      if (brewMethod === 'espresso') return m.category === 'coffee' || m.name.toLowerCase().includes('white') || m.name.toLowerCase().includes('espresso');
+      if (brewMethod === 'cold-drip') return m.name.toLowerCase().includes('cold') || m.category === 'manual-brew';
+      return true;
+    }) || matchedCafe.menu[0];
 
   return (
     <div className="flex flex-col w-full px-4 pt-2 pb-28 bg-[#fdf9f3] gap-4">
@@ -279,24 +340,24 @@ export const AIMatchmakerScreen: React.FC<AIMatchmakerScreenProps> = ({
           <div className="relative w-full h-40 bg-[#ebe8e2]">
             <img
               className="w-full h-full object-cover"
-              alt="Kroma Studio"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqrNeL8DX5mFTL4NXDVsO5uUnasQxILGvjagIyVg35WOLip9Jfb2A2KDSG62iSo9u-OEkjQ0PjehMb6Ve5JAb6pWmJHfK-RcpZSi4aPQNgMvJtylAX7z8OFFMlzdzT7XN_SajLdT4ZIjgTAplm_BsuSmhyyMgex_5fJKfjUzBDjf7oM70jooa0z2gyaqB3xv6wF3sKYhB8LVYORSGNgJ2duDGnLbjrLTbi6sffmPkp0oSvIFJ0IaA2tg"
+              alt={matchedCafe.name}
+              src={matchedCafe.images[0]}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#271310]/80 via-transparent to-transparent"></div>
             <div className="absolute bottom-2.5 left-4 right-4 flex items-end justify-between text-white">
               <div>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#add461] text-[#131f00] uppercase tracking-wider">
-                  Third-Wave Roastery
+                  {matchedCafe.features[0] || 'Third-Wave Roastery'}
                 </span>
                 <h2 className="font-headline-lg text-lg font-bold mt-1 text-white">
-                  Kroma Studio & Roastery
+                  {matchedCafe.name}
                 </h2>
               </div>
               <span className="px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-md text-[#271310] text-xs font-bold flex items-center gap-1 shadow-sm">
                 <span className="material-symbols-outlined text-[15px] text-[#7d562d]" style={{ fontVariationSettings: "'FILL' 1" }}>
                   star
                 </span>
-                4.9
+                {matchedCafe.rating}
               </span>
             </div>
           </div>
@@ -311,7 +372,7 @@ export const AIMatchmakerScreen: React.FC<AIMatchmakerScreenProps> = ({
               <div className="flex flex-col">
                 <span className="text-[10px] font-bold uppercase text-[#7d562d]">Why you'll love it</span>
                 <p className="text-xs text-[#504442] mt-0.5 leading-snug">
-                  Tested 112 Mbps dedicated fiber Wi-Fi, whisper-quiet acoustic playlist (52 dB avg), and artisan anaerobic single-origin beans starting at IDR 42k.
+                  Cocok untuk {mood.toLowerCase()}: Wi-Fi kencang ({matchedCafe.keySpecs.wifiSpeed}), colokan {matchedCafe.aspectRatings.plugs.toLowerCase()}, suasana {matchedCafe.keySpecs.noiseLabel.toLowerCase()} ({matchedCafe.keySpecs.noiseDb}), dan harga rata-rata {matchedCafe.keySpecs.priceAvg}.
                 </p>
               </div>
             </div>
@@ -320,52 +381,54 @@ export const AIMatchmakerScreen: React.FC<AIMatchmakerScreenProps> = ({
             <div className="grid grid-cols-3 gap-2">
               <div className="p-2 rounded-xl bg-[#f1ede7] flex flex-col items-center text-center">
                 <span className="material-symbols-outlined text-[18px] text-[#7d562d]">electrical_services</span>
-                <span className="text-[11px] font-bold text-[#271310] mt-0.5">Universal Outlet</span>
-                <span className="text-[9px] text-[#504442]">At every seat</span>
+                <span className="text-[11px] font-bold text-[#271310] mt-0.5 truncate w-full">{matchedCafe.aspectRatings.plugs}</span>
+                <span className="text-[9px] text-[#504442]">Colokan Listrik</span>
               </div>
 
               <div className="p-2 rounded-xl bg-[#f1ede7] flex flex-col items-center text-center">
                 <span className="material-symbols-outlined text-[18px] text-[#7ca034]">speed</span>
-                <span className="text-[11px] font-bold text-[#271310] mt-0.5">112 Mbps</span>
-                <span className="text-[9px] text-[#504442]">Low latency</span>
+                <span className="text-[11px] font-bold text-[#271310] mt-0.5">{matchedCafe.keySpecs.wifiSpeed}</span>
+                <span className="text-[9px] text-[#504442]">{matchedCafe.keySpecs.wifiLabel}</span>
               </div>
 
               <div className="p-2 rounded-xl bg-[#f1ede7] flex flex-col items-center text-center">
                 <span className="material-symbols-outlined text-[18px] text-[#7d562d]">near_me</span>
-                <span className="text-[11px] font-bold text-[#271310] mt-0.5">450 meters</span>
-                <span className="text-[9px] text-[#504442]">6 min walk</span>
+                <span className="text-[11px] font-bold text-[#271310] mt-0.5">{matchedCafe.distance}</span>
+                <span className="text-[9px] text-[#504442]">{matchedCafe.neighborhood}</span>
               </div>
             </div>
 
             {/* Single Origin Spotlight */}
             <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#ffca98]/20 border border-[#ffca98]/40">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[#ffca98] flex items-center justify-center text-[#7a532a]">
+                <div className="w-8 h-8 rounded-full bg-[#ffca98] flex items-center justify-center text-[#7a532a] shrink-0">
                   <span className="material-symbols-outlined text-[17px]">grain</span>
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-xs font-bold text-[#271310]">Recommended Pour: Kerinci Honey</span>
-                  <span className="text-[10px] text-[#504442]">Peach, Jasmine & Cane Sugar • IDR 45k</span>
+                <div className="flex flex-col min-w-0">
+                  <span className="text-xs font-bold text-[#271310] truncate">Menu Rekomendasi: {recommendedPour.name}</span>
+                  <span className="text-[10px] text-[#504442] truncate">
+                    {recommendedPour.tastingNotes ? recommendedPour.tastingNotes.join(' • ') : recommendedPour.description} • {recommendedPour.price}
+                  </span>
                 </div>
               </div>
-              <span className="text-[10px] font-bold text-[#7d562d] bg-white px-2 py-0.5 rounded-full shadow-xs">
-                V60 Ready
+              <span className="text-[10px] font-bold text-[#7d562d] bg-white px-2 py-0.5 rounded-full shadow-xs shrink-0">
+                {recommendedPour.category === 'manual-brew' ? 'Filter Ready' : 'Espresso'}
               </span>
             </div>
 
             {/* Action Buttons */}
             <div className="flex items-center gap-2 pt-1">
               <button
-                onClick={() => onSelectCafe('kroma')}
-                className="flex-1 h-11 rounded-xl bg-[#271310] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-transform"
+                onClick={() => onSelectCafe(matchedCafe.id)}
+                className="flex-1 h-11 rounded-xl bg-[#271310] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm active:scale-98 transition-transform cursor-pointer"
               >
-                <span>View Cafe Profile</span>
+                <span>Lihat Profil {matchedCafe.name.split(' ')[0]}</span>
                 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
               </button>
 
               <button
-                onClick={() => alert('Opening turn-by-turn walking route to Kroma Studio (450m)...')}
-                className="w-11 h-11 rounded-xl bg-[#f1ede7] text-[#7d562d] flex items-center justify-center hover:bg-[#ebe8e2] active:scale-95 transition-all shadow-xs"
+                onClick={() => alert(`Membuka rute jalan kaki menuju ${matchedCafe.name} (${matchedCafe.distance})...`)}
+                className="w-11 h-11 rounded-xl bg-[#f1ede7] text-[#7d562d] flex items-center justify-center hover:bg-[#ebe8e2] active:scale-95 transition-all shadow-xs cursor-pointer"
                 title="Directions"
               >
                 <span className="material-symbols-outlined text-[20px]">directions</span>

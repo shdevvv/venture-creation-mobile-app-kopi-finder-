@@ -1,0 +1,46 @@
+[
+  {
+    "id": "vch-two-roasters",
+    "partnerCafe": "Two Roasters",
+    "branch": "Senopati Branch",
+    "title": "Buy 1 Get 1 Manual Brew",
+    "subtitle": "Single Origin Ethiopian & Gayo selection",
+    "code": "TF-B1G1-8921-JKT",
+    "pin": "8921",
+    "expiresHours": 5,
+    "discountBadge": "Flash Perk",
+    "bannerText": "Two Roasters × KopiFinder Exclusive",
+    "terms": [
+      "Dine-in only",
+      "V60 or Kalita Wave",
+      "Passport Holders"
+    ],
+    "steps": [
+      "Show this voucher on your phone to the cashier barista before ordering.",
+      "Ask barista to enter 4-digit counter verification PIN.",
+      "Enjoy your complimentary single origin pour over!"
+    ]
+  },
+  {
+    "id": "vch-kyo-coffee",
+    "partnerCafe": "Kyo Coffee",
+    "branch": "Jatiwaringin Branch",
+    "title": "Free Specialty Pastry with Filter V60",
+    "subtitle": "Artisan Japanese matcha roll or butter croissant",
+    "code": "KYO-FREE-PASTRY-26",
+    "pin": "4210",
+    "expiresHours": 8,
+    "discountBadge": "Member Perk",
+    "bannerText": "Kyo Coffee × KopiFinder Member Perk",
+    "terms": [
+      "Dine-in only",
+      "Valid with Tokyo Slow-Drip V60",
+      "Level 3+ Explorers"
+    ],
+    "steps": [
+      "Order any manual brew slow-drip V60 at Kyo counter.",
+      "Show this voucher barcode to cashier.",
+      "Select your complimentary pastry at display showcase."
+    ]
+  }
+]
